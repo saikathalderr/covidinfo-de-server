@@ -4,6 +4,7 @@ import type { Application } from "express";
 import Routes from "./routes";
 import express from "express";
 import morgan from "morgan";
+import swaggerUi from "swagger-ui-express";
 
 const PORT = process.env.PORT || 8080;
 const app: Application = express();
@@ -12,6 +13,15 @@ const app: Application = express();
 app.use(express.json());
 app.use(morgan("dev"));
 app.use(express.static("public"));
+app.use(
+  "/docs",
+  swaggerUi.serve,
+  swaggerUi.setup(undefined, {
+    swaggerOptions: {
+      url: "/swagger.json",
+    },
+  })
+);
 
 app.use(Routes);
 
