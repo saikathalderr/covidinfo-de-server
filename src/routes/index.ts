@@ -6,7 +6,8 @@ import express from 'express';
 const router: Router = express.Router();
 
 router.get('/ping', async (_req: Request, res: Response) => {
-    const response = await PingController.ping();
+    const { ping } = new PingController();
+    const response = await ping();
     res.json(response);
 });
 

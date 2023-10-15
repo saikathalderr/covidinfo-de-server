@@ -6,7 +6,9 @@ interface PingResponse {
 @Route('ping')
 export default class PingController {
     @Get('/')
-    public static async ping(): Promise<PingResponse> {
-        return { message: 'pong' };
+    public async ping(): Promise<PingResponse> {
+        return {
+            message: 'Ok!',
+        };
     }
 }
