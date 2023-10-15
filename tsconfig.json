@@ -9,7 +9,8 @@
         "emitDecoratorMetadata": true,
         "baseUrl": ".",
         "paths": {
-            "~/controllers/*": ["src/controllers/*"]
+            "~/controllers/*": ["src/controllers/*"],
+            "~/middlewares/*": ["src/middlewares/*"]
         }
     }
 }
