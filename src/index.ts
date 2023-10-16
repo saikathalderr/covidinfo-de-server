@@ -6,7 +6,7 @@ import express from 'express';
 import morgan from 'morgan';
 import swaggerUi from 'swagger-ui-express';
 
-const PORT = process.env.PORT || 8080;
+const PORT = process.env.PORT || 4000;
 const app: Application = express();
 
 // Middlewares
