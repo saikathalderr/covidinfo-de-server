@@ -1,0 +1,16 @@
+{
+    "RKI": {
+        "API": {
+            "LIVE": {
+                "URL": "https://api.corona-zahlen.org/germany"
+            },
+            "LOCAL": {
+                "URL": "http://localhost:3000/germany"
+            },
+            "ENDPOINTS": {
+                "CASES": "/history/cases",
+                "DEATHS": "/history/deaths"
+            }
+        }
+    }
+}

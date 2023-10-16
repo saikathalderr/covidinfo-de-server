@@ -6,6 +6,65 @@
 		"requestBodies": {},
 		"responses": {},
 		"schemas": {
+			"Case": {
+				"properties": {
+					"cases": {
+						"type": "number",
+						"format": "double"
+					},
+					"date": {
+						"type": "string",
+						"format": "date-time"
+					}
+				},
+				"required": [
+					"cases",
+					"date"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"FetchCasesResponse": {
+				"properties": {
+					"cases": {
+						"items": {
+							"$ref": "#/components/schemas/Case"
+						},
+						"type": "array"
+					}
+				},
+				"required": [
+					"cases"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"Sort": {
+				"enum": [
+					"cases",
+					"date"
+				],
+				"type": "string"
+			},
+			"Order": {
+				"enum": [
+					"asc",
+					"desc"
+				],
+				"type": "string"
+			},
+			"CasesQueryParams": {
+				"properties": {
+					"sort": {
+						"$ref": "#/components/schemas/Sort"
+					},
+					"order": {
+						"$ref": "#/components/schemas/Order"
+					}
+				},
+				"type": "object",
+				"additionalProperties": false
+			},
 			"PingResponse": {
 				"properties": {
 					"message": {
@@ -31,6 +90,42 @@
 	},
 	"openapi": "3.0.0",
 	"paths": {
+		"/cases": {
+			"get": {
+				"operationId": "FetchCases",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/FetchCasesResponse"
+								}
+							}
+						}
+					}
+				},
+				"security": [],
+				"parameters": [
+					{
+						"in": "query",
+						"name": "sort",
+						"required": false,
+						"schema": {
+							"$ref": "#/components/schemas/Sort"
+						}
+					},
+					{
+						"in": "query",
+						"name": "order",
+						"required": false,
+						"schema": {
+							"$ref": "#/components/schemas/Order"
+						}
+					}
+				]
+			}
+		},
 		"/ping": {
 			"get": {
 				"operationId": "Ping",
