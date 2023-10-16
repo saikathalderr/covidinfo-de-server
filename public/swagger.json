@@ -39,14 +39,14 @@
 				"type": "object",
 				"additionalProperties": false
 			},
-			"Sort": {
+			"CasesSort": {
 				"enum": [
 					"cases",
 					"date"
 				],
 				"type": "string"
 			},
-			"Order": {
+			"CasesOrder": {
 				"enum": [
 					"asc",
 					"desc"
@@ -56,10 +56,69 @@
 			"CasesQueryParams": {
 				"properties": {
 					"sort": {
-						"$ref": "#/components/schemas/Sort"
+						"$ref": "#/components/schemas/CasesSort"
 					},
 					"order": {
-						"$ref": "#/components/schemas/Order"
+						"$ref": "#/components/schemas/CasesOrder"
+					}
+				},
+				"type": "object",
+				"additionalProperties": false
+			},
+			"Death": {
+				"properties": {
+					"deaths": {
+						"type": "number",
+						"format": "double"
+					},
+					"date": {
+						"type": "string",
+						"format": "date-time"
+					}
+				},
+				"required": [
+					"deaths",
+					"date"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"FetchDeathsResponse": {
+				"properties": {
+					"deaths": {
+						"items": {
+							"$ref": "#/components/schemas/Death"
+						},
+						"type": "array"
+					}
+				},
+				"required": [
+					"deaths"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"DeathsSort": {
+				"enum": [
+					"deaths",
+					"date"
+				],
+				"type": "string"
+			},
+			"DeathsOrder": {
+				"enum": [
+					"asc",
+					"desc"
+				],
+				"type": "string"
+			},
+			"DeathsQueryParams": {
+				"properties": {
+					"sort": {
+						"$ref": "#/components/schemas/DeathsSort"
+					},
+					"order": {
+						"$ref": "#/components/schemas/DeathsOrder"
 					}
 				},
 				"type": "object",
@@ -112,7 +171,7 @@
 						"name": "sort",
 						"required": false,
 						"schema": {
-							"$ref": "#/components/schemas/Sort"
+							"$ref": "#/components/schemas/CasesSort"
 						}
 					},
 					{
@@ -120,7 +179,43 @@
 						"name": "order",
 						"required": false,
 						"schema": {
-							"$ref": "#/components/schemas/Order"
+							"$ref": "#/components/schemas/CasesOrder"
+						}
+					}
+				]
+			}
+		},
+		"/deaths": {
+			"get": {
+				"operationId": "FetchDeaths",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/FetchDeathsResponse"
+								}
+							}
+						}
+					}
+				},
+				"security": [],
+				"parameters": [
+					{
+						"in": "query",
+						"name": "sort",
+						"required": false,
+						"schema": {
+							"$ref": "#/components/schemas/DeathsSort"
+						}
+					},
+					{
+						"in": "query",
+						"name": "order",
+						"required": false,
+						"schema": {
+							"$ref": "#/components/schemas/DeathsOrder"
 						}
 					}
 				]

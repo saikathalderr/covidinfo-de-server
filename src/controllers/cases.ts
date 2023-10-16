@@ -2,14 +2,14 @@ import { Get, Queries, Route } from 'tsoa';
 
 import axios from 'axios';
 import config from 'config';
-import { handleSort } from '~/utils/sort';
+import { handleCasesSort } from '~/utils/sort';
 
-export enum Order {
+export enum CasesOrder {
     ASC = 'asc',
     DESC = 'desc',
 }
 
-export enum Sort {
+export enum CasesSort {
     CASES = 'cases',
     DATE = 'date',
 }
@@ -33,8 +33,8 @@ export interface CasesResponse {
 }
 
 export interface CasesQueryParams {
-    sort?: Sort;
-    order?: Order;
+    sort?: CasesSort;
+    order?: CasesOrder;
 }
 
 export interface FetchCasesResponse {
@@ -52,7 +52,7 @@ export default class CasesController {
         const { sort, order } = queryParams;
         const { data } = await axios.get<CasesResponse>(_casesApiUrl);
         const { data: casesData } = data;
-        const cases = casesData.sort(handleSort({ order, sort }));
+        const cases = casesData.sort(handleCasesSort({ order, sort }));
         return {
             cases,
         };

@@ -1,6 +1,7 @@
 import type { Request, Response, Router } from 'express';
 
 import CasesRouter from './cases.routes';
+import DeathsRouter from './deaths.routes';
 import PingController from '~/controllers/ping';
 import express from 'express';
 
@@ -13,5 +14,6 @@ router.get('/ping', async (_req: Request, res: Response) => {
 });
 
 router.use('/cases', CasesRouter);
+router.use('/deaths', DeathsRouter);
 
 export default router;

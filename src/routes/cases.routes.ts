@@ -16,7 +16,8 @@ casesRouter.get('/', async (req: Request, res: Response) => {
     try {
         const { order, sort } = req.query as unknown as CasesQueryParams;
         const { cases } = await fetchCases({ order, sort });
-        throwSuccess({ response: res, data: cases });
+        const message = 'Cases fetched successfully';
+        throwSuccess({ response: res, message, data: cases });
     } catch (error) {
         throwInternalError({ response: res, error });
     }
