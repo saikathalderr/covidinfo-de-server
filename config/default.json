@@ -12,5 +12,9 @@
                 "DEATHS": "/history/deaths"
             }
         }
+    },
+    "RATE_LIMIT": {
+        "WINDOW_MS": 1000,
+        "MAX_LIMIT": 5
     }
 }
