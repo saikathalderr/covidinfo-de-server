@@ -51,6 +51,7 @@
         "~/handlers": "build/handlers",
         "~/interfaces": "build/interfaces",
         "~/enums": "build/enums",
-        "~/utils": "build/utils"
+        "~/utils": "build/utils",
+        "~/messages": "build/messages"
     }
 }

@@ -6,6 +6,181 @@
 		"requestBodies": {},
 		"responses": {},
 		"schemas": {
+			"Delta": {
+				"properties": {
+					"cases": {
+						"type": "number",
+						"format": "double"
+					},
+					"deaths": {
+						"type": "number",
+						"format": "double"
+					},
+					"recovered": {
+						"type": "number",
+						"format": "double"
+					},
+					"weekIncidence": {
+						"type": "number",
+						"format": "double"
+					}
+				},
+				"required": [
+					"cases",
+					"deaths",
+					"recovered",
+					"weekIncidence"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"RValue4Days": {
+				"properties": {
+					"value": {
+						"type": "number",
+						"format": "double"
+					},
+					"date": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"value",
+					"date"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"RValue7Days": {
+				"properties": {
+					"value": {
+						"type": "number",
+						"format": "double"
+					},
+					"date": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"value",
+					"date"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"R": {
+				"properties": {
+					"value": {
+						"type": "number",
+						"format": "double"
+					},
+					"rValue4Days": {
+						"$ref": "#/components/schemas/RValue4Days"
+					},
+					"rValue7Days": {
+						"$ref": "#/components/schemas/RValue7Days"
+					},
+					"lastUpdate": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"value",
+					"rValue4Days",
+					"rValue7Days",
+					"lastUpdate"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"Hospitalization": {
+				"properties": {
+					"cases7Days": {
+						"type": "number",
+						"format": "double"
+					},
+					"incidence7Days": {
+						"type": "number",
+						"format": "double"
+					},
+					"date": {
+						"type": "string"
+					},
+					"lastUpdate": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"cases7Days",
+					"incidence7Days",
+					"date",
+					"lastUpdate"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"Germany": {
+				"properties": {
+					"cases": {
+						"type": "number",
+						"format": "double"
+					},
+					"deaths": {
+						"type": "number",
+						"format": "double"
+					},
+					"recovered": {
+						"type": "number",
+						"format": "double"
+					},
+					"weekIncidence": {
+						"type": "number",
+						"format": "double"
+					},
+					"casesPer100k": {
+						"type": "number",
+						"format": "double"
+					},
+					"casesPerWeek": {
+						"type": "number",
+						"format": "double"
+					},
+					"delta": {
+						"$ref": "#/components/schemas/Delta"
+					},
+					"r": {
+						"$ref": "#/components/schemas/R"
+					},
+					"hospitalization": {
+						"$ref": "#/components/schemas/Hospitalization"
+					}
+				},
+				"required": [
+					"cases",
+					"deaths",
+					"recovered",
+					"weekIncidence",
+					"casesPer100k",
+					"casesPerWeek",
+					"delta",
+					"r",
+					"hospitalization"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"FetchGermanyResponse": {
+				"properties": {
+					"germany": {
+						"$ref": "#/components/schemas/Germany"
+					}
+				},
+				"required": [
+					"germany"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
 			"Case": {
 				"properties": {
 					"cases": {
@@ -149,7 +324,26 @@
 	},
 	"openapi": "3.0.0",
 	"paths": {
-		"/cases": {
+		"/germany": {
+			"get": {
+				"operationId": "FetchInfo",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/FetchGermanyResponse"
+								}
+							}
+						}
+					}
+				},
+				"security": [],
+				"parameters": []
+			}
+		},
+		"/germany/cases": {
 			"get": {
 				"operationId": "FetchCases",
 				"responses": {
@@ -185,7 +379,7 @@
 				]
 			}
 		},
-		"/deaths": {
+		"/germany/deaths": {
 			"get": {
 				"operationId": "FetchDeaths",
 				"responses": {

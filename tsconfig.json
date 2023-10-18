@@ -14,7 +14,8 @@
             "~/handlers/*": ["src/handlers/*"],
             "~/interfaces/*": ["src/interfaces/*"],
             "~/enums/*": ["src/enums/*"],
-            "~/utils/*": ["src/utils/*"]
+            "~/utils/*": ["src/utils/*"],
+            "~/messages/*": ["src/messages/*"]
         }
     }
 }

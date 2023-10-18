@@ -1,6 +1,7 @@
 import DeathsController, { DeathsQueryParams } from '~/controllers/deaths';
 import type { Request, Response } from 'express';
 
+import { DEATHS_FETCHED_SUCCESSFULLY } from '~/messages/success';
 import ErrorHandler from '~/handlers/error.handler';
 import type { Router } from 'express';
 import SuccessHandler from '~/handlers/success.handler';
@@ -16,7 +17,7 @@ deathsRouter.get('/', async (req: Request, res: Response) => {
     try {
         const { order, sort } = req.query as unknown as DeathsQueryParams;
         const { deaths } = await fetchDeaths({ order, sort });
-        const message = 'Deaths fetched successfully';
+        const message = DEATHS_FETCHED_SUCCESSFULLY;
         throwSuccess({ response: res, message, data: deaths });
     } catch (error) {
         throwInternalError({ response: res, error });

@@ -3,6 +3,7 @@ import { Get, Queries, Route } from 'tsoa';
 import axios from 'axios';
 import config from 'config';
 import { handleCasesSort } from '~/utils/sort';
+import { Meta } from './germany';
 
 export enum CasesOrder {
     ASC = 'asc',
@@ -18,15 +19,6 @@ export interface Case {
     cases: number;
     date: Date;
 }
-
-export interface Meta {
-    source: string;
-    contact: string;
-    info: string;
-    lastUpdate: Date;
-    lastCheckedForUpdate: Date;
-}
-
 export interface CasesResponse {
     data: Case[];
     meta: Meta;
@@ -45,7 +37,7 @@ const _rkiApiUrl: string = config.get('RKI.API.LOCAL.URL');
 const _casesEndPoint: string = config.get('RKI.API.ENDPOINTS.CASES');
 const _casesApiUrl = `${_rkiApiUrl}${_casesEndPoint}`;
 
-@Route('cases')
+@Route('germany/cases')
 export default class CasesController {
     @Get('/')
     public async fetchCases(@Queries() queryParams: CasesQueryParams): Promise<FetchCasesResponse> {

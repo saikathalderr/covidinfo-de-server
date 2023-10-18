@@ -3,6 +3,7 @@ import { Get, Queries, Route } from 'tsoa';
 import axios from 'axios';
 import config from 'config';
 import { handleDeathsSort } from '~/utils/sort';
+import { Meta } from './germany';
 
 export enum DeathsOrder {
     ASC = 'asc',
@@ -17,14 +18,6 @@ export enum DeathsSort {
 export interface Death {
     deaths: number;
     date: Date;
-}
-
-export interface Meta {
-    source: string;
-    contact: string;
-    info: string;
-    lastUpdate: Date;
-    lastCheckedForUpdate: Date;
 }
 
 export interface DeathsResponse {
@@ -44,7 +37,7 @@ const _rkiApiUrl: string = config.get('RKI.API.LOCAL.URL');
 const _deathsEndPoint: string = config.get('RKI.API.ENDPOINTS.DEATHS');
 const _deathsApiUrl = `${_rkiApiUrl}${_deathsEndPoint}`;
 
-@Route('deaths')
+@Route('germany/deaths')
 export default class DeathsController {
     @Get('/')
     public async fetchDeaths(
