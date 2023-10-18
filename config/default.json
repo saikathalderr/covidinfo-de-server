@@ -2,14 +2,15 @@
     "RKI": {
         "API": {
             "LIVE": {
-                "URL": "https://api.corona-zahlen.org/germany"
+                "URL": "https://api.corona-zahlen.org"
             },
             "LOCAL": {
-                "URL": "http://localhost:3000/germany"
+                "URL": "http://localhost:3000"
             },
             "ENDPOINTS": {
-                "CASES": "/history/cases",
-                "DEATHS": "/history/deaths"
+                "CASES": "/germany/history/cases",
+                "DEATHS": "/germany/history/deaths",
+                "STATES": "/states"
             }
         }
     },

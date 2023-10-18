@@ -5,12 +5,13 @@ import DeathsRouter from './deaths.routes';
 import ErrorHandler from '~/handlers/error.handler';
 import { GERMANY_INFO_FETCHED_SUCCESSFULLY } from '~/messages/success';
 import GermanyController from '~/controllers/germany';
+import GermanyStatesRouter from './states.routes';
 import SuccessHandler from '~/handlers/success.handler';
 import express from 'express';
 
-const router: Router = express.Router();
+const germanyRouter: Router = express.Router();
 
-router.get('/', async (_req: Request, res: Response) => {
+germanyRouter.get('/', async (_req: Request, res: Response) => {
     const { fetchInfo } = new GermanyController();
     const { throwInternalError } = new ErrorHandler();
     const { throwSuccess } = new SuccessHandler();
@@ -22,7 +23,8 @@ router.get('/', async (_req: Request, res: Response) => {
         throwInternalError({ response: res, error });
     }
 });
-router.use('/cases', CasesRouter);
-router.use('/deaths', DeathsRouter);
+germanyRouter.use('/cases', CasesRouter);
+germanyRouter.use('/deaths', DeathsRouter);
+germanyRouter.use('/states', GermanyStatesRouter);
 
-export default router;
+export default germanyRouter;

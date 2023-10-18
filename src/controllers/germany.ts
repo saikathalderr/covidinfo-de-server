@@ -60,8 +60,8 @@ export interface GermanyResponse extends Germany {
 export interface FetchGermanyResponse {
     germany: Germany;
 }
-
-const _germanyApiUrl: string = config.get('RKI.API.LOCAL.URL');
+const _rkiApiUrl: string = config.get('RKI.API.LOCAL.URL');
+const _germanyApiUrl: string = `${_rkiApiUrl}/germany`;
 
 @Route('germany')
 export default class GermanyController {

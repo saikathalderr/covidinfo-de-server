@@ -38,8 +38,8 @@ app.use(
 );
 app.use(limiter);
 
-app.use('/ping', PingRouter);
 app.use('/germany', Routes);
+app.use('/ping', PingRouter);
 
 app.listen(PORT, () => {
     const message = `Server is running on http://localhost:${PORT}`;

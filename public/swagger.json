@@ -310,6 +310,197 @@
 				],
 				"type": "object",
 				"additionalProperties": false
+			},
+			"GermanyState": {
+				"properties": {
+					"id": {
+						"type": "number",
+						"format": "double"
+					},
+					"name": {
+						"type": "string"
+					},
+					"population": {
+						"type": "number",
+						"format": "double"
+					},
+					"cases": {
+						"type": "number",
+						"format": "double"
+					},
+					"deaths": {
+						"type": "number",
+						"format": "double"
+					},
+					"casesPerWeek": {
+						"type": "number",
+						"format": "double"
+					},
+					"deathsPerWeek": {
+						"type": "number",
+						"format": "double"
+					},
+					"recovered": {
+						"type": "number",
+						"format": "double"
+					},
+					"abbreviation": {
+						"type": "string"
+					},
+					"weekIncidence": {
+						"type": "number",
+						"format": "double"
+					},
+					"casesPer100k": {
+						"type": "number",
+						"format": "double"
+					},
+					"delta": {
+						"$ref": "#/components/schemas/Delta"
+					},
+					"hospitalization": {
+						"$ref": "#/components/schemas/Hospitalization"
+					}
+				},
+				"required": [
+					"id",
+					"name",
+					"population",
+					"cases",
+					"deaths",
+					"casesPerWeek",
+					"deathsPerWeek",
+					"recovered",
+					"abbreviation",
+					"weekIncidence",
+					"casesPer100k",
+					"delta",
+					"hospitalization"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"FetchAllGermanyStatesResponse": {
+				"properties": {
+					"data": {
+						"properties": {
+							"TH": {
+								"$ref": "#/components/schemas/GermanyState"
+							},
+							"ST": {
+								"$ref": "#/components/schemas/GermanyState"
+							},
+							"SN": {
+								"$ref": "#/components/schemas/GermanyState"
+							},
+							"MV": {
+								"$ref": "#/components/schemas/GermanyState"
+							},
+							"BB": {
+								"$ref": "#/components/schemas/GermanyState"
+							},
+							"BE": {
+								"$ref": "#/components/schemas/GermanyState"
+							},
+							"SL": {
+								"$ref": "#/components/schemas/GermanyState"
+							},
+							"BY": {
+								"$ref": "#/components/schemas/GermanyState"
+							},
+							"BW": {
+								"$ref": "#/components/schemas/GermanyState"
+							},
+							"RP": {
+								"$ref": "#/components/schemas/GermanyState"
+							},
+							"HE": {
+								"$ref": "#/components/schemas/GermanyState"
+							},
+							"NW": {
+								"$ref": "#/components/schemas/GermanyState"
+							},
+							"HB": {
+								"$ref": "#/components/schemas/GermanyState"
+							},
+							"NI": {
+								"$ref": "#/components/schemas/GermanyState"
+							},
+							"HH": {
+								"$ref": "#/components/schemas/GermanyState"
+							},
+							"SH": {
+								"$ref": "#/components/schemas/GermanyState"
+							}
+						},
+						"required": [
+							"TH",
+							"ST",
+							"SN",
+							"MV",
+							"BB",
+							"BE",
+							"SL",
+							"BY",
+							"BW",
+							"RP",
+							"HE",
+							"NW",
+							"HB",
+							"NI",
+							"HH",
+							"SH"
+						],
+						"type": "object"
+					}
+				},
+				"required": [
+					"data"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"FetchGermanyStateResponse": {
+				"properties": {
+					"data": {
+						"$ref": "#/components/schemas/GermanyState"
+					}
+				},
+				"required": [
+					"data"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"GermanyStates": {
+				"enum": [
+					"SH",
+					"HH",
+					"NI",
+					"HB",
+					"NW",
+					"HE",
+					"RP",
+					"BW",
+					"BY",
+					"SL",
+					"BE",
+					"BB",
+					"MV",
+					"SN",
+					"ST",
+					"TH"
+				],
+				"type": "string"
+			},
+			"GermanyStatesQueryParams": {
+				"properties": {
+					"state": {
+						"$ref": "#/components/schemas/GermanyStates"
+					}
+				},
+				"type": "object",
+				"additionalProperties": false
 			}
 		},
 		"securitySchemes": {}
@@ -432,6 +623,41 @@
 				},
 				"security": [],
 				"parameters": []
+			}
+		},
+		"/germany/states": {
+			"get": {
+				"operationId": "FetchStates",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"anyOf": [
+										{
+											"$ref": "#/components/schemas/FetchAllGermanyStatesResponse"
+										},
+										{
+											"$ref": "#/components/schemas/FetchGermanyStateResponse"
+										}
+									]
+								}
+							}
+						}
+					}
+				},
+				"security": [],
+				"parameters": [
+					{
+						"in": "query",
+						"name": "state",
+						"required": false,
+						"schema": {
+							"$ref": "#/components/schemas/GermanyStates"
+						}
+					}
+				]
 			}
 		}
 	},
