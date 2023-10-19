@@ -2,7 +2,6 @@ import GermanyStatesController, { GermanyStatesQueryParams } from '~/controllers
 import type { Request, Response } from 'express';
 
 import ErrorHandler from '~/handlers/error.handler';
-import { GERMANY_STATES_FETCHED_SUCCESSFULLY } from '~/messages/success';
 import SuccessHandler from '~/handlers/success.handler';
 import express from 'express';
 
@@ -15,13 +14,27 @@ germanyStatesRouter.get('/', async (req: Request, res: Response) => {
     try {
         const { state } = req.query as unknown as GermanyStatesQueryParams;
         const { data } = await fetchStates({ state });
-        const message = GERMANY_STATES_FETCHED_SUCCESSFULLY.replace(
-            '{{state}}',
-            state?.length ? `state:${state}` : 'States',
-        );
         throwSuccess({
             response: res,
-            message,
+            data,
+        });
+    } catch (error) {
+        throwInternalError({
+            error,
+            response: res,
+        });
+    }
+});
+
+germanyStatesRouter.get('/cases', async (req: Request, res: Response) => {
+    const { throwInternalError } = new ErrorHandler();
+    const { throwSuccess } = new SuccessHandler();
+    const { fetchStatesCasesHistory } = new GermanyStatesController();
+    try {
+        const { state } = req.query as unknown as GermanyStatesQueryParams;
+        const { data } = await fetchStatesCasesHistory({ state });
+        throwSuccess({
+            response: res,
             data,
         });
     } catch (error) {

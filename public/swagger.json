@@ -171,12 +171,12 @@
 			},
 			"FetchGermanyResponse": {
 				"properties": {
-					"germany": {
+					"data": {
 						"$ref": "#/components/schemas/Germany"
 					}
 				},
 				"required": [
-					"germany"
+					"data"
 				],
 				"type": "object",
 				"additionalProperties": false
@@ -201,7 +201,7 @@
 			},
 			"FetchCasesResponse": {
 				"properties": {
-					"cases": {
+					"data": {
 						"items": {
 							"$ref": "#/components/schemas/Case"
 						},
@@ -209,7 +209,7 @@
 					}
 				},
 				"required": [
-					"cases"
+					"data"
 				],
 				"type": "object",
 				"additionalProperties": false
@@ -260,7 +260,7 @@
 			},
 			"FetchDeathsResponse": {
 				"properties": {
-					"deaths": {
+					"data": {
 						"items": {
 							"$ref": "#/components/schemas/Death"
 						},
@@ -268,7 +268,7 @@
 					}
 				},
 				"required": [
-					"deaths"
+					"data"
 				],
 				"type": "object",
 				"additionalProperties": false
@@ -380,7 +380,7 @@
 				"type": "object",
 				"additionalProperties": false
 			},
-			"FetchAllGermanyStatesResponse": {
+			"FetchGermanyAllStatesResponse": {
 				"properties": {
 					"data": {
 						"properties": {
@@ -499,6 +499,126 @@
 						"$ref": "#/components/schemas/GermanyStates"
 					}
 				},
+				"type": "object",
+				"additionalProperties": false
+			},
+			"GermanyStateCasesHistory": {
+				"properties": {
+					"id": {
+						"type": "number",
+						"format": "double"
+					},
+					"name": {
+						"type": "string"
+					},
+					"history": {
+						"items": {
+							"$ref": "#/components/schemas/Case"
+						},
+						"type": "array"
+					}
+				},
+				"required": [
+					"id",
+					"name",
+					"history"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"FetchGermanyStateCasesHistoryResponse": {
+				"properties": {
+					"data": {
+						"properties": {},
+						"additionalProperties": {
+							"$ref": "#/components/schemas/GermanyStateCasesHistory"
+						},
+						"type": "object"
+					}
+				},
+				"required": [
+					"data"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"FetchGermanyAllStatesCasesHistoryResponse": {
+				"properties": {
+					"data": {
+						"properties": {
+							"TH": {
+								"$ref": "#/components/schemas/GermanyStateCasesHistory"
+							},
+							"ST": {
+								"$ref": "#/components/schemas/GermanyStateCasesHistory"
+							},
+							"SN": {
+								"$ref": "#/components/schemas/GermanyStateCasesHistory"
+							},
+							"MV": {
+								"$ref": "#/components/schemas/GermanyStateCasesHistory"
+							},
+							"BB": {
+								"$ref": "#/components/schemas/GermanyStateCasesHistory"
+							},
+							"BE": {
+								"$ref": "#/components/schemas/GermanyStateCasesHistory"
+							},
+							"SL": {
+								"$ref": "#/components/schemas/GermanyStateCasesHistory"
+							},
+							"BY": {
+								"$ref": "#/components/schemas/GermanyStateCasesHistory"
+							},
+							"BW": {
+								"$ref": "#/components/schemas/GermanyStateCasesHistory"
+							},
+							"RP": {
+								"$ref": "#/components/schemas/GermanyStateCasesHistory"
+							},
+							"HE": {
+								"$ref": "#/components/schemas/GermanyStateCasesHistory"
+							},
+							"NW": {
+								"$ref": "#/components/schemas/GermanyStateCasesHistory"
+							},
+							"HB": {
+								"$ref": "#/components/schemas/GermanyStateCasesHistory"
+							},
+							"NI": {
+								"$ref": "#/components/schemas/GermanyStateCasesHistory"
+							},
+							"HH": {
+								"$ref": "#/components/schemas/GermanyStateCasesHistory"
+							},
+							"SH": {
+								"$ref": "#/components/schemas/GermanyStateCasesHistory"
+							}
+						},
+						"required": [
+							"TH",
+							"ST",
+							"SN",
+							"MV",
+							"BB",
+							"BE",
+							"SL",
+							"BY",
+							"BW",
+							"RP",
+							"HE",
+							"NW",
+							"HB",
+							"NI",
+							"HH",
+							"SH"
+						],
+						"type": "object"
+					}
+				},
+				"required": [
+					"data"
+				],
 				"type": "object",
 				"additionalProperties": false
 			}
@@ -636,10 +756,45 @@
 								"schema": {
 									"anyOf": [
 										{
-											"$ref": "#/components/schemas/FetchAllGermanyStatesResponse"
+											"$ref": "#/components/schemas/FetchGermanyAllStatesResponse"
 										},
 										{
 											"$ref": "#/components/schemas/FetchGermanyStateResponse"
+										}
+									]
+								}
+							}
+						}
+					}
+				},
+				"security": [],
+				"parameters": [
+					{
+						"in": "query",
+						"name": "state",
+						"required": false,
+						"schema": {
+							"$ref": "#/components/schemas/GermanyStates"
+						}
+					}
+				]
+			}
+		},
+		"/germany/states/cases": {
+			"get": {
+				"operationId": "FetchStatesCasesHistory",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"anyOf": [
+										{
+											"$ref": "#/components/schemas/FetchGermanyStateCasesHistoryResponse"
+										},
+										{
+											"$ref": "#/components/schemas/FetchGermanyAllStatesCasesHistoryResponse"
 										}
 									]
 								}

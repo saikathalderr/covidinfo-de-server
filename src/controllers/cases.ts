@@ -30,7 +30,7 @@ export interface CasesQueryParams {
 }
 
 export interface FetchCasesResponse {
-    cases: Case[];
+    data: Case[];
 }
 
 const _rkiApiUrl: string = config.get('RKI.API.LOCAL.URL');
@@ -46,7 +46,7 @@ export default class CasesController {
         const { data: casesData } = data;
         const cases = casesData.sort(handleCasesSort({ order, sort }));
         return {
-            cases,
+            data: cases,
         };
     }
 }

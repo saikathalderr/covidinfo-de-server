@@ -58,7 +58,7 @@ export interface GermanyResponse extends Germany {
     meta: Meta;
 }
 export interface FetchGermanyResponse {
-    germany: Germany;
+    data: Germany;
 }
 const _rkiApiUrl: string = config.get('RKI.API.LOCAL.URL');
 const _germanyApiUrl: string = `${_rkiApiUrl}/germany`;
@@ -80,7 +80,7 @@ export default class GermanyController {
             hospitalization: data.hospitalization,
         };
         return {
-            germany: germanyInfo,
+            data: germanyInfo,
         };
     }
 }

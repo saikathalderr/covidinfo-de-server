@@ -31,7 +31,7 @@ export interface DeathsQueryParams {
 }
 
 export interface FetchDeathsResponse {
-    deaths: Death[];
+    data: Death[];
 }
 const _rkiApiUrl: string = config.get('RKI.API.LOCAL.URL');
 const _deathsEndPoint: string = config.get('RKI.API.ENDPOINTS.DEATHS');
@@ -48,7 +48,7 @@ export default class DeathsController {
         const { data: deathsData } = data;
         const deaths = deathsData.sort(handleDeathsSort({ order, sort }));
         return {
-            deaths,
+            data: deaths,
         };
     }
 }
