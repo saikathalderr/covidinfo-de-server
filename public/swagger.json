@@ -621,6 +621,156 @@
 				],
 				"type": "object",
 				"additionalProperties": false
+			},
+			"GermanyStatesCasesQueryParams": {
+				"properties": {
+					"sort": {
+						"$ref": "#/components/schemas/CasesSort"
+					},
+					"order": {
+						"$ref": "#/components/schemas/CasesOrder"
+					},
+					"state": {
+						"$ref": "#/components/schemas/GermanyStates"
+					}
+				},
+				"type": "object",
+				"additionalProperties": false
+			},
+			"GermanyStateDeathsHistory": {
+				"properties": {
+					"id": {
+						"type": "number",
+						"format": "double"
+					},
+					"name": {
+						"type": "string"
+					},
+					"history": {
+						"items": {
+							"$ref": "#/components/schemas/Death"
+						},
+						"type": "array"
+					}
+				},
+				"required": [
+					"id",
+					"name",
+					"history"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"FetchGermanyStateDeathsHistoryResponse": {
+				"properties": {
+					"data": {
+						"properties": {},
+						"additionalProperties": {
+							"$ref": "#/components/schemas/GermanyStateDeathsHistory"
+						},
+						"type": "object"
+					}
+				},
+				"required": [
+					"data"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"FetchGermanyAllStatesDeathsHistoryResponse": {
+				"properties": {
+					"data": {
+						"properties": {
+							"TH": {
+								"$ref": "#/components/schemas/GermanyStateDeathsHistory"
+							},
+							"ST": {
+								"$ref": "#/components/schemas/GermanyStateDeathsHistory"
+							},
+							"SN": {
+								"$ref": "#/components/schemas/GermanyStateDeathsHistory"
+							},
+							"MV": {
+								"$ref": "#/components/schemas/GermanyStateDeathsHistory"
+							},
+							"BB": {
+								"$ref": "#/components/schemas/GermanyStateDeathsHistory"
+							},
+							"BE": {
+								"$ref": "#/components/schemas/GermanyStateDeathsHistory"
+							},
+							"SL": {
+								"$ref": "#/components/schemas/GermanyStateDeathsHistory"
+							},
+							"BY": {
+								"$ref": "#/components/schemas/GermanyStateDeathsHistory"
+							},
+							"BW": {
+								"$ref": "#/components/schemas/GermanyStateDeathsHistory"
+							},
+							"RP": {
+								"$ref": "#/components/schemas/GermanyStateDeathsHistory"
+							},
+							"HE": {
+								"$ref": "#/components/schemas/GermanyStateDeathsHistory"
+							},
+							"NW": {
+								"$ref": "#/components/schemas/GermanyStateDeathsHistory"
+							},
+							"HB": {
+								"$ref": "#/components/schemas/GermanyStateDeathsHistory"
+							},
+							"NI": {
+								"$ref": "#/components/schemas/GermanyStateDeathsHistory"
+							},
+							"HH": {
+								"$ref": "#/components/schemas/GermanyStateDeathsHistory"
+							},
+							"SH": {
+								"$ref": "#/components/schemas/GermanyStateDeathsHistory"
+							}
+						},
+						"required": [
+							"TH",
+							"ST",
+							"SN",
+							"MV",
+							"BB",
+							"BE",
+							"SL",
+							"BY",
+							"BW",
+							"RP",
+							"HE",
+							"NW",
+							"HB",
+							"NI",
+							"HH",
+							"SH"
+						],
+						"type": "object"
+					}
+				},
+				"required": [
+					"data"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"GermanyStatesDeathsQueryParams": {
+				"properties": {
+					"sort": {
+						"$ref": "#/components/schemas/DeathsSort"
+					},
+					"order": {
+						"$ref": "#/components/schemas/DeathsOrder"
+					},
+					"state": {
+						"$ref": "#/components/schemas/GermanyStates"
+					}
+				},
+				"type": "object",
+				"additionalProperties": false
 			}
 		},
 		"securitySchemes": {}
@@ -804,6 +954,73 @@
 				},
 				"security": [],
 				"parameters": [
+					{
+						"in": "query",
+						"name": "sort",
+						"required": false,
+						"schema": {
+							"$ref": "#/components/schemas/CasesSort"
+						}
+					},
+					{
+						"in": "query",
+						"name": "order",
+						"required": false,
+						"schema": {
+							"$ref": "#/components/schemas/CasesOrder"
+						}
+					},
+					{
+						"in": "query",
+						"name": "state",
+						"required": false,
+						"schema": {
+							"$ref": "#/components/schemas/GermanyStates"
+						}
+					}
+				]
+			}
+		},
+		"/germany/states/deaths": {
+			"get": {
+				"operationId": "FetchStatesDeathsHistory",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"anyOf": [
+										{
+											"$ref": "#/components/schemas/FetchGermanyStateDeathsHistoryResponse"
+										},
+										{
+											"$ref": "#/components/schemas/FetchGermanyAllStatesDeathsHistoryResponse"
+										}
+									]
+								}
+							}
+						}
+					}
+				},
+				"security": [],
+				"parameters": [
+					{
+						"in": "query",
+						"name": "sort",
+						"required": false,
+						"schema": {
+							"$ref": "#/components/schemas/DeathsSort"
+						}
+					},
+					{
+						"in": "query",
+						"name": "order",
+						"required": false,
+						"schema": {
+							"$ref": "#/components/schemas/DeathsOrder"
+						}
+					},
 					{
 						"in": "query",
 						"name": "state",

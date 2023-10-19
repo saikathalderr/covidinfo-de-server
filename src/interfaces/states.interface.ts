@@ -1,4 +1,6 @@
-import { Case } from './cases.interface';
+import { Case, CasesQueryParams } from './cases.interface';
+import { Death, DeathsQueryParams } from './deaths.interface';
+
 import { Meta } from './germany.interface';
 
 export enum GermanyStates {
@@ -26,7 +28,21 @@ export interface GermanyStateCasesHistory {
     history: Case[];
 }
 
+export interface GermanyStateDeathsHistory {
+    id: number;
+    name: string;
+    history: Death[];
+}
+
 export interface GermanyStatesQueryParams {
+    state?: GermanyStates;
+}
+
+export interface GermanyStatesCasesQueryParams extends CasesQueryParams {
+    state?: GermanyStates;
+}
+
+export interface GermanyStatesDeathsQueryParams extends DeathsQueryParams {
     state?: GermanyStates;
 }
 export interface Delta {
@@ -145,5 +161,40 @@ export interface GermanyAllStateCasesHistoryResponse
 }
 
 export interface GermanyStateCasesHistoryResponse extends FetchGermanyStateCasesHistoryResponse {
+    meta: Meta;
+}
+
+export interface FetchGermanyAllStatesDeathsHistoryResponse {
+    data: {
+        SH: GermanyStateDeathsHistory;
+        HH: GermanyStateDeathsHistory;
+        NI: GermanyStateDeathsHistory;
+        HB: GermanyStateDeathsHistory;
+        NW: GermanyStateDeathsHistory;
+        HE: GermanyStateDeathsHistory;
+        RP: GermanyStateDeathsHistory;
+        BW: GermanyStateDeathsHistory;
+        BY: GermanyStateDeathsHistory;
+        SL: GermanyStateDeathsHistory;
+        BE: GermanyStateDeathsHistory;
+        BB: GermanyStateDeathsHistory;
+        MV: GermanyStateDeathsHistory;
+        SN: GermanyStateDeathsHistory;
+        ST: GermanyStateDeathsHistory;
+        TH: GermanyStateDeathsHistory;
+    };
+}
+export interface GermanyAllStateDeathsHistoryResponse
+    extends FetchGermanyAllStatesDeathsHistoryResponse {
+    meta: Meta;
+}
+
+export interface FetchGermanyStateDeathsHistoryResponse {
+    data: {
+        [state: string]: GermanyStateDeathsHistory;
+    };
+}
+
+export interface GermanyStateDeathsHistoryResponse extends FetchGermanyStateDeathsHistoryResponse {
     meta: Meta;
 }
