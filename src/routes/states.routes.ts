@@ -1,7 +1,8 @@
-import GermanyStatesController, { GermanyStatesQueryParams } from '~/controllers/states';
 import type { Request, Response } from 'express';
 
 import ErrorHandler from '~/handlers/error.handler';
+import GermanyStatesController from '~/controllers/states';
+import { GermanyStatesQueryParams } from '~/interfaces/states.interface';
 import SuccessHandler from '~/handlers/success.handler';
 import express from 'express';
 

@@ -1,12 +1,18 @@
 {
     "entryFile": "src/index.ts",
     "noImplicitAdditionalProperties": "throw-on-extras",
-    "controllerPathGlobs": ["./src/controllers/*.ts"],
+    "controllerPathGlobs": ["./src/controllers/*.ts", "./src/interfaces/*.ts"],
     "spec": {
         "outputDirectory": "public",
         "specVersion": 3
     },
     "routes": {
         "routesDir": "build"
+    },
+    "compilerOptions": {
+        "paths": {
+            "~/controllers/*": ["src/controllers/*"],
+            "~/interfaces/*": ["src/interfaces/*"]
+        }
     }
 }

@@ -1,6 +1,7 @@
-import CasesController, { CasesQueryParams } from '~/controllers/cases';
 import type { Request, Response } from 'express';
 
+import CasesController from '~/controllers/cases';
+import { CasesQueryParams } from '~/interfaces/cases.interface';
 import ErrorHandler from '~/handlers/error.handler';
 import type { Router } from 'express';
 import SuccessHandler from '~/handlers/success.handler';

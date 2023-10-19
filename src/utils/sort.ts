@@ -1,5 +1,5 @@
-import { Case, CasesOrder, CasesSort } from '~/controllers/cases';
-import { Death, DeathsOrder, DeathsSort } from '~/controllers/deaths';
+import { Case, CasesOrder, CasesSort } from '~/interfaces/cases.interface';
+import { Death, DeathsOrder, DeathsSort } from '~/interfaces/deaths.interface';
 
 type HandleCasesSortArgs = {
     sort?: CasesSort;

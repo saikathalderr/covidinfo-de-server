@@ -1,6 +1,7 @@
-import DeathsController, { DeathsQueryParams } from '~/controllers/deaths';
 import type { Request, Response } from 'express';
 
+import DeathsController from '~/controllers/deaths';
+import { DeathsQueryParams } from '~/interfaces/deaths.interface';
 import ErrorHandler from '~/handlers/error.handler';
 import type { Router } from 'express';
 import SuccessHandler from '~/handlers/success.handler';
