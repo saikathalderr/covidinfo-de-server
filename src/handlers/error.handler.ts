@@ -13,7 +13,7 @@ export interface ErrorResponse {
 }
 
 export default class ErrorHandler {
-    public async throwInternalError(params: ErrorHandlerArgs) {
+    public async _throwInternalError(params: ErrorHandlerArgs) {
         const { response, status, error } = params;
         const msg = error instanceof Error ? error.message : THROW_INTERNAL_SERVER_ERROR;
         const statusCode = status || StatusCodes.INTERNAL_SERVER_ERROR;

@@ -14,7 +14,7 @@ type HandleDeathsSortArgs = {
 type HandleCasesSortFunction = (a: Case, b: Case) => number;
 type HandleDeathsSortFunction = (a: Death, b: Death) => number;
 
-export function handleCasesSort(args: HandleCasesSortArgs): HandleCasesSortFunction {
+export function _handleCasesSort(args: HandleCasesSortArgs): HandleCasesSortFunction {
     return (a: Case, b: Case) => {
         const defaultSort = CasesSort.CASES;
         const defaultOrder = CasesOrder.DESC;
@@ -36,7 +36,7 @@ export function handleCasesSort(args: HandleCasesSortArgs): HandleCasesSortFunct
     };
 }
 
-export function handleDeathsSort(args: HandleDeathsSortArgs): HandleDeathsSortFunction {
+export function _handleDeathsSort(args: HandleDeathsSortArgs): HandleDeathsSortFunction {
     return (a: Death, b: Death) => {
         const defaultSort = DeathsSort.DEATHS;
         const defaultOrder = DeathsOrder.DESC;

@@ -10,16 +10,16 @@ import express from 'express';
 const casesRouter: Router = express.Router();
 
 const { fetchCases } = new CasesController();
-const { throwInternalError } = new ErrorHandler();
-const { throwSuccess } = new SuccessHandler();
+const { _throwInternalError } = new ErrorHandler();
+const { _throwSuccess } = new SuccessHandler();
 
 casesRouter.get('/', async (req: Request, res: Response) => {
     try {
         const { order, sort } = req.query as unknown as CasesQueryParams;
         const { data } = await fetchCases({ order, sort });
-        throwSuccess({ response: res, data });
+        _throwSuccess({ response: res, data });
     } catch (error) {
-        throwInternalError({ response: res, error });
+        _throwInternalError({ response: res, error });
     }
 });
 

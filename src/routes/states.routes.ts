@@ -13,18 +13,18 @@ import express from 'express';
 const germanyStatesRouter = express.Router();
 
 germanyStatesRouter.get('/', async (req: Request, res: Response) => {
-    const { throwInternalError } = new ErrorHandler();
-    const { throwSuccess } = new SuccessHandler();
+    const { _throwInternalError } = new ErrorHandler();
+    const { _throwSuccess } = new SuccessHandler();
     const { fetchStates } = new GermanyStatesController();
     try {
         const { state } = req.query as unknown as GermanyStatesQueryParams;
         const { data } = await fetchStates({ state });
-        throwSuccess({
+        _throwSuccess({
             response: res,
             data,
         });
     } catch (error) {
-        throwInternalError({
+        _throwInternalError({
             error,
             response: res,
         });
@@ -32,18 +32,18 @@ germanyStatesRouter.get('/', async (req: Request, res: Response) => {
 });
 
 germanyStatesRouter.get('/cases', async (req: Request, res: Response) => {
-    const { throwInternalError } = new ErrorHandler();
-    const { throwSuccess } = new SuccessHandler();
+    const { _throwInternalError } = new ErrorHandler();
+    const { _throwSuccess } = new SuccessHandler();
     const { fetchStatesCasesHistory } = new GermanyStatesController();
     try {
         const { state, sort, order } = req.query as unknown as GermanyStatesCasesQueryParams;
         const { data } = await fetchStatesCasesHistory({ state, sort, order });
-        throwSuccess({
+        _throwSuccess({
             response: res,
             data,
         });
     } catch (error) {
-        throwInternalError({
+        _throwInternalError({
             error,
             response: res,
         });
@@ -51,18 +51,18 @@ germanyStatesRouter.get('/cases', async (req: Request, res: Response) => {
 });
 
 germanyStatesRouter.get('/deaths', async (req: Request, res: Response) => {
-    const { throwInternalError } = new ErrorHandler();
-    const { throwSuccess } = new SuccessHandler();
+    const { _throwInternalError } = new ErrorHandler();
+    const { _throwSuccess } = new SuccessHandler();
     const { fetchStatesDeathsHistory } = new GermanyStatesController();
     try {
         const { state, sort, order } = req.query as unknown as GermanyStatesDeathsQueryParams;
         const { data } = await fetchStatesDeathsHistory({ state, sort, order });
-        throwSuccess({
+        _throwSuccess({
             response: res,
             data,
         });
     } catch (error) {
-        throwInternalError({
+        _throwInternalError({
             error,
             response: res,
         });

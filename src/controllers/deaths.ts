@@ -2,7 +2,7 @@ import { Get, Queries, Route } from 'tsoa';
 
 import axios from 'axios';
 import config from 'config';
-import { handleDeathsSort } from '~/utils/sort';
+import { _handleDeathsSort } from '~/utils/sort';
 import {
     DeathsQueryParams,
     DeathsResponse,
@@ -22,7 +22,7 @@ export default class DeathsController {
         const { sort, order } = queryParams;
         const { data } = await axios.get<DeathsResponse>(_deathsApiUrl);
         const { data: deathsData } = data;
-        const deaths = deathsData.sort(handleDeathsSort({ order, sort }));
+        const deaths = deathsData.sort(_handleDeathsSort({ order, sort }));
         return {
             data: deaths,
         };

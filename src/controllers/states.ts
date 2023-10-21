@@ -20,7 +20,7 @@ import {
     GermanyStatesCasesQueryParams,
     GermanyStatesDeathsQueryParams,
 } from '~/interfaces/states.interface';
-import { handleCasesSort, handleDeathsSort } from '~/utils/sort';
+import { _handleCasesSort, _handleDeathsSort } from '~/utils/sort';
 import { CasesOrder, CasesSort } from '~/interfaces/cases.interface';
 import { DeathsOrder, DeathsSort } from '~/interfaces/deaths.interface';
 
@@ -60,7 +60,7 @@ async function _fetchAllStatesCasesHistory({
         await axios.get<GermanyAllStateCasesHistoryResponse>(_statesCasesHistoryApiUrl);
     const { data: statesData } = data;
     Object.values(statesData).forEach((entry) => {
-        entry.history.sort(handleCasesSort({ sort, order }));
+        entry.history.sort(_handleCasesSort({ sort, order }));
     });
     return {
         data: statesData,
@@ -81,7 +81,7 @@ async function _fetchStateCasesHistory({
     );
     const { data: statesData } = data;
     Object.values(statesData).forEach((entry) => {
-        entry.history.sort(handleCasesSort({ sort, order }));
+        entry.history.sort(_handleCasesSort({ sort, order }));
     });
     return {
         data: statesData,
@@ -100,7 +100,7 @@ async function _fetchAllStatesDeathsHistory({
     );
     const { data: statesData } = data;
     Object.values(statesData).forEach((entry) => {
-        entry.history.sort(handleDeathsSort({ sort, order }));
+        entry.history.sort(_handleDeathsSort({ sort, order }));
     });
     return {
         data: statesData,
@@ -121,7 +121,7 @@ async function _fetchStateDeathsHistory({
     );
     const { data: statesData } = data;
     Object.values(statesData).forEach((entry) => {
-        entry.history.sort(handleDeathsSort({ sort, order }));
+        entry.history.sort(_handleDeathsSort({ sort, order }));
     });
     return {
         data: statesData,

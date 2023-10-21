@@ -14,7 +14,7 @@ export interface SuccessResponse {
 }
 
 export default class SuccessHandler {
-    public async throwSuccess(params: SuccessHandlerParams): Promise<void> {
+    public async _throwSuccess(params: SuccessHandlerParams): Promise<void> {
         const { response, status, message, data } = params;
         const statusCode = status || StatusCodes.OK;
         const msg = message;

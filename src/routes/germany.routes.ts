@@ -12,16 +12,16 @@ const germanyRouter: Router = express.Router();
 
 germanyRouter.get('/', async (_req: Request, res: Response) => {
     const { fetchInfo } = new GermanyController();
-    const { throwInternalError } = new ErrorHandler();
-    const { throwSuccess } = new SuccessHandler();
+    const { _throwInternalError } = new ErrorHandler();
+    const { _throwSuccess } = new SuccessHandler();
     try {
         const { data } = await fetchInfo();
-        throwSuccess({
+        _throwSuccess({
             response: res,
             data,
         });
     } catch (error) {
-        throwInternalError({ response: res, error });
+        _throwInternalError({ response: res, error });
     }
 });
 germanyRouter.use('/cases', CasesRouter);

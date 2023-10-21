@@ -2,7 +2,7 @@ import { Get, Queries, Route } from 'tsoa';
 
 import axios from 'axios';
 import config from 'config';
-import { handleCasesSort } from '~/utils/sort';
+import { _handleCasesSort } from '~/utils/sort';
 import { CasesQueryParams } from '~/interfaces/cases.interface';
 import { CasesResponse, FetchCasesResponse } from '~/interfaces/cases.interface';
 const _rkiApiUrl: string = config.get('RKI.API.URL');
@@ -16,7 +16,7 @@ export default class CasesController {
         const { sort, order } = queryParams;
         const { data } = await axios.get<CasesResponse>(_casesApiUrl);
         const { data: casesData } = data;
-        const cases = casesData.sort(handleCasesSort({ order, sort }));
+        const cases = casesData.sort(_handleCasesSort({ order, sort }));
         return {
             data: cases,
         };
