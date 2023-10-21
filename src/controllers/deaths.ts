@@ -9,7 +9,7 @@ import {
     FetchDeathsResponse,
 } from '~/interfaces/deaths.interface';
 
-const _rkiApiUrl: string = config.get('RKI.API.LOCAL.URL');
+const _rkiApiUrl: string = config.get('RKI.API.URL');
 const _deathsEndPoint: string = config.get('RKI.API.ENDPOINTS.DEATHS');
 const _deathsApiUrl = `${_rkiApiUrl}${_deathsEndPoint}`;
 

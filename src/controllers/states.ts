@@ -24,7 +24,7 @@ import { handleCasesSort, handleDeathsSort } from '~/utils/sort';
 import { CasesOrder, CasesSort } from '~/interfaces/cases.interface';
 import { DeathsOrder, DeathsSort } from '~/interfaces/deaths.interface';
 
-const _rkiApiUrl: string = config.get('RKI.API.LOCAL.URL');
+const _rkiApiUrl: string = config.get('RKI.API.URL');
 const _statesEndPoint: string = config.get('RKI.API.ENDPOINTS.STATES');
 const _statesApiUrl = `${_rkiApiUrl}${_statesEndPoint}`;
 const _statesCasesHistoryApiUrl: string = _statesApiUrl + '/history/cases';
@@ -32,7 +32,7 @@ const _stateCasesHistoryApiUrl: string = _statesApiUrl + '/{{state}}/history/cas
 const _statesDeathsHistoryApiUrl: string = _statesApiUrl + '/history/deaths';
 const _stateDeathsHistoryApiUrl: string = _statesApiUrl + '/{{state}}/history/deaths';
 
-async function fetchAllStates(): Promise<FetchGermanyAllStatesResponse> {
+async function _fetchAllStates(): Promise<FetchGermanyAllStatesResponse> {
     const { data } = await axios.get<GermanyAllStatesResponse>(_statesApiUrl);
     const { data: statesData } = data;
 
@@ -41,7 +41,7 @@ async function fetchAllStates(): Promise<FetchGermanyAllStatesResponse> {
     };
 }
 
-async function fetchState(state: GermanyStates): Promise<FetchGermanyStateResponse> {
+async function _fetchState(state: GermanyStates): Promise<FetchGermanyStateResponse> {
     const { data } = await axios.get<GermanyStateResponse>(_statesApiUrl);
     const { data: statesData } = data;
     return {
@@ -49,7 +49,7 @@ async function fetchState(state: GermanyStates): Promise<FetchGermanyStateRespon
     };
 }
 
-async function fetchAllStatesCasesHistory({
+async function _fetchAllStatesCasesHistory({
     sort,
     order,
 }: {
@@ -67,7 +67,7 @@ async function fetchAllStatesCasesHistory({
     };
 }
 
-async function fetchStateCasesHistory({
+async function _fetchStateCasesHistory({
     state,
     sort,
     order,
@@ -88,7 +88,7 @@ async function fetchStateCasesHistory({
     };
 }
 
-async function fetchAllStatesDeathsHistory({
+async function _fetchAllStatesDeathsHistory({
     sort,
     order,
 }: {
@@ -107,7 +107,7 @@ async function fetchAllStatesDeathsHistory({
     };
 }
 
-async function fetchStateDeathsHistory({
+async function _fetchStateDeathsHistory({
     state,
     sort,
     order,
@@ -128,7 +128,7 @@ async function fetchStateDeathsHistory({
     };
 }
 
-async function isValidState(state?: GermanyStates): Promise<boolean> {
+async function _isValidState(state?: GermanyStates): Promise<boolean> {
     return state?.length ? !Object.values(GermanyStates).includes(state as GermanyStates) : false;
 }
 
@@ -140,14 +140,14 @@ export default class GermanyStatesController {
     ): Promise<FetchGermanyAllStatesResponse | FetchGermanyStateResponse> {
         const { state } = queryParams;
 
-        if (!isValidState(state)) {
+        if (!_isValidState(state)) {
             throw new Error(INVALID_STATE_CODE);
         }
 
         if (!state) {
-            return fetchAllStates();
+            return _fetchAllStates();
         }
-        return fetchState(state);
+        return _fetchState(state);
     }
 
     @Get('/cases')
@@ -156,15 +156,15 @@ export default class GermanyStatesController {
     ): Promise<FetchGermanyStateCasesHistoryResponse | FetchGermanyAllStatesCasesHistoryResponse> {
         const { state, sort, order } = queryParams;
 
-        if (!isValidState(state)) {
+        if (!_isValidState(state)) {
             throw new Error(INVALID_STATE_CODE);
         }
 
         if (!state) {
-            return fetchAllStatesCasesHistory({ sort, order });
+            return _fetchAllStatesCasesHistory({ sort, order });
         }
 
-        return fetchStateCasesHistory({ state, sort, order });
+        return _fetchStateCasesHistory({ state, sort, order });
     }
 
     @Get('/deaths')
@@ -175,14 +175,14 @@ export default class GermanyStatesController {
     > {
         const { state, sort, order } = queryParams;
 
-        if (!isValidState(state)) {
+        if (!_isValidState(state)) {
             throw new Error(INVALID_STATE_CODE);
         }
 
         if (!state) {
-            return fetchAllStatesDeathsHistory({ sort, order });
+            return _fetchAllStatesDeathsHistory({ sort, order });
         }
 
-        return fetchStateDeathsHistory({ state, sort, order });
+        return _fetchStateDeathsHistory({ state, sort, order });
     }
 }

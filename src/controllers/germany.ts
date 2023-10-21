@@ -4,7 +4,7 @@ import { Get, Route } from 'tsoa';
 import axios from 'axios';
 import config from 'config';
 
-const _rkiApiUrl: string = config.get('RKI.API.LOCAL.URL');
+const _rkiApiUrl: string = config.get('RKI.API.URL');
 const _germanyApiUrl: string = `${_rkiApiUrl}/germany`;
 
 @Route('germany')

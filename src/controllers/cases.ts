@@ -5,7 +5,7 @@ import config from 'config';
 import { handleCasesSort } from '~/utils/sort';
 import { CasesQueryParams } from '~/interfaces/cases.interface';
 import { CasesResponse, FetchCasesResponse } from '~/interfaces/cases.interface';
-const _rkiApiUrl: string = config.get('RKI.API.LOCAL.URL');
+const _rkiApiUrl: string = config.get('RKI.API.URL');
 const _casesEndPoint: string = config.get('RKI.API.ENDPOINTS.CASES');
 const _casesApiUrl = `${_rkiApiUrl}${_casesEndPoint}`;
 
