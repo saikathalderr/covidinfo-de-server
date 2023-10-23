@@ -4,6 +4,7 @@ import type { Application } from 'express';
 import PingRouter from './routes/ping.routes';
 import Routes from './routes/germany.routes';
 import config from 'config';
+import cors from 'cors';
 import express from 'express';
 import morgan from 'morgan';
 import { rateLimit } from 'express-rate-limit';
@@ -24,6 +25,7 @@ const limiter = rateLimit({
 });
 
 // Middlewares
+app.use(cors());
 app.use(express.json());
 app.use(morgan('dev'));
 app.use(express.static('public'));
